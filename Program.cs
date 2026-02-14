@@ -1,5 +1,5 @@
-﻿using ATMApp.View;
 using System;
+using ATMApp.View;
 
 public class Program
 {
