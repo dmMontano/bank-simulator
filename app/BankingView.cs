@@ -2,11 +2,12 @@ using ATMApp.Services;
 
 namespace ATMApp.View
 {
-    public class BankingView
+    public static class BankingView
     {
         public static void Run()
         {
             double balance = 1000.00;
+            double lastTransaction = 0.0;
     
             Console.WriteLine("Dannicah Montano");
             Console.WriteLine("=== Simple ATM System ===");
@@ -26,7 +27,7 @@ namespace ATMApp.View
                 switch (input)
                 {
                     case "1":
-                        double currentBalance = BankingServices.GetBalance(in balance);
+                        double currentBalance = BankingServices.GetBalance(balance);
                         Console.WriteLine($"Current Balance: Php {currentBalance:F2}");
                         break;
     
@@ -45,6 +46,8 @@ namespace ATMApp.View
                             Console.WriteLine("Invalid deposit amount. Please enter a positive value.");
                             continue;
                         }
+    
+                        lastTransaction = depositAmount;
     
                         Console.WriteLine("Deposit successful.");
                         Console.WriteLine($"Updated Balance: Php {balance:F2}");
@@ -70,15 +73,16 @@ namespace ATMApp.View
                             continue;
                         }
     
+                        lastTransaction = withdrawAmount;
+    
                         Console.WriteLine("Withdrawal successful.");
                         Console.WriteLine($"Updated Balance: Php {balance:F2}");
                         break;
     
                     case "4":
-                        var statement = BankingServices.MiniStatement(in balance);
                         Console.WriteLine("\n--- Mini Statement ---");
-                        Console.WriteLine($"Current Balance: Php {statement.currentBalance:F2}");
-                        Console.WriteLine($"Last Transaction Amount: Php {statement.lastTransaction:F2}");
+                        Console.WriteLine($"Current Balance: Php {balance:F2}");
+                        Console.WriteLine($"Last Transaction Amount: Php {lastTransaction:F2}");
                         break;
     
                     case "5":
