@@ -11,7 +11,11 @@ namespace ATMApp.Services
         // Option 2: ref (Deposit)
         public static bool Deposit(ref double balance, double amount)
         {
-            return false; //placeholder return value, replace with actual implementation
+            if (amount <= 0)
+                return false;
+
+            balance += amount;
+            return true;
         }
 
         // Option 3: ref + out (Withdraw)
@@ -20,7 +24,20 @@ namespace ATMApp.Services
             double amount,
             out bool isSuccessful)
         {
-            isSuccessful = false; //placeholder value, replace with actual implementation
+            if (amount <= 0)
+            {
+                isSuccessful = false;
+                return;
+            }
+
+            if (amount > balance)
+            {
+                isSuccessful = false;
+                return;
+            }
+
+            balance -= amount;
+            isSuccessful = true;
         }
     }
 }
